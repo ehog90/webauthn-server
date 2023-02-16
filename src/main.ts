@@ -16,6 +16,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('NestJS Webauthn Demo')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .setVersion('0.1')
     .build();
   const document = SwaggerModule.createDocument(app, config);
