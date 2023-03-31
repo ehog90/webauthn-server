@@ -6,7 +6,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 
 import { AuthenticationDataService } from '../../../db/services/authentication-data/authentication-data.service';
@@ -19,6 +19,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { verifyAuthenticatorAssertionResponse } from '../../utils/webauthn.util';
 
 @Controller('login')
+@ApiTags('Login')
 export class LoginController {
   // #region Constructors (1)
 

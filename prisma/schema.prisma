@@ -23,6 +23,6 @@ model Authentication {
   createdAt    DateTime @default(now())
   publicKey    String
   credentialId String
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId       Int
 }

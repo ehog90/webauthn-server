@@ -1,4 +1,5 @@
 import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 
 import { UserData } from '../../../auth/decorators/user-data/user-data.decorator';
@@ -7,6 +8,8 @@ import { AuthenticationDataService } from '../../services/authentication-data/au
 
 @Controller('authentication')
 @UseGuards(JwtGuard)
+@ApiTags('Webauthn Authentications')
+@ApiBearerAuth()
 export class AuthenticationController {
   // #region Constructors (1)
 
@@ -21,7 +24,7 @@ export class AuthenticationController {
     return await this.authDataService.deleteAuth(id);
   }
 
-  @Get('')
+  @Get()
   public async getAuthsForUser(@UserData() user: User) {
     return await this.authDataService.getAuthsForUser(user);
   }

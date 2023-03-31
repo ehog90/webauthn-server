@@ -20,6 +20,10 @@ export class UserService extends PrismaService {
     await this.prismaService.user.create({ data: { userName, password } });
   }
 
+  public async deleteUser(userName: string) {
+    await this.prismaService.user.deleteMany({ where: { userName } });
+  }
+
   public async findById(userId: number, omitPassword = true) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },

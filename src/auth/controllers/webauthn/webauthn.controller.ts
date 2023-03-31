@@ -1,4 +1,5 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 
 import { getRandomKeyForUser } from '../../../db/helpers/bcrypt.helper';
@@ -11,6 +12,8 @@ import { verifyAuthenticatorAttestationResponse } from '../../utils/webauthn.uti
 
 @Controller('webauthn')
 @UseGuards(JwtGuard)
+@ApiTags('Webauthn-specific')
+@ApiBearerAuth()
 export class WebauthnController {
   // #region Constructors (1)
 

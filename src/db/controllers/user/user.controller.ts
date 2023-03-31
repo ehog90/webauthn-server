@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -11,7 +13,7 @@ import { UserService } from '../../services/user/user.service';
 import { CreateUserDto } from './create-user.dto';
 
 @Controller('user')
-@ApiTags('User')
+@ApiTags('User Management')
 export class UserController {
   // #region Constructors (1)
 
@@ -30,6 +32,17 @@ export class UserController {
       );
     } catch (err) {
       //Don't do this
+      throw new BadRequestException();
+    }
+  }
+
+  @Delete(':userName')
+  public async deleteUser(@Param('id') userName: string) {
+    try {
+      return await this.userService.deleteUser(userName);
+    } catch (err) {
+      //Don't do this
+      console.log('aaaaa', err);
       throw new BadRequestException();
     }
   }
