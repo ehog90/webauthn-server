@@ -5,17 +5,25 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AuthenticationDataService {
+  // #region Constructors (1)
+
   constructor(private readonly prismaService: PrismaService) {}
 
-  public async saveAuth(user: User, publicKey: string, credentialId: string) {
-    await this.prismaService.authentication.create({
-      data: { userId: user.id, publicKey, credentialId },
-    });
-  }
+  // #endregion Constructors (1)
+
+  // #region Public Methods (4)
 
   public async deleteAuth(id: number) {
     await this.prismaService.authentication.deleteMany({
       where: { id },
+    });
+  }
+
+  public async getAuthById(id: string) {
+    return await this.prismaService.authentication.findFirst({
+      where: {
+        credentialId: id,
+      },
     });
   }
 
@@ -29,11 +37,11 @@ export class AuthenticationDataService {
     return data;
   }
 
-  public async getAuthById(id: string) {
-    return await this.prismaService.authentication.findFirst({
-      where: {
-        credentialId: id,
-      },
+  public async saveAuth(user: User, publicKey: string, credentialId: string) {
+    await this.prismaService.authentication.create({
+      data: { userId: user.id, publicKey, credentialId },
     });
   }
+
+  // #endregion Public Methods (4)
 }

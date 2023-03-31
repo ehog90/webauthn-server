@@ -13,12 +13,13 @@ import { CreateUserDto } from './create-user.dto';
 @Controller('user')
 @ApiTags('User')
 export class UserController {
+  // #region Constructors (1)
+
   constructor(public readonly userService: UserService) {}
 
-  @Get()
-  public async getAllUsers() {
-    return this.userService.getUserList();
-  }
+  // #endregion Constructors (1)
+
+  // #region Public Methods (2)
 
   @Post()
   public async addUser(@Body() createUser: CreateUserDto) {
@@ -32,4 +33,11 @@ export class UserController {
       throw new BadRequestException();
     }
   }
+
+  @Get()
+  public async getAllUsers() {
+    return this.userService.getUserList();
+  }
+
+  // #endregion Public Methods (2)
 }

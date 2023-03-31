@@ -16,7 +16,7 @@ export class AuthService {
 
   // #endregion Constructors (1)
 
-  // #region Public Methods (1)
+  // #region Public Methods (2)
 
   public async authByPassword(
     userName: string,
@@ -50,5 +50,5 @@ export class AuthService {
     return { userData, jwt };
   }
 
-  // #endregion Public Methods (1)
+  // #endregion Public Methods (2)
 }

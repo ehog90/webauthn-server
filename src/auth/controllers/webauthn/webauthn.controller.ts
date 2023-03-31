@@ -12,9 +12,15 @@ import { verifyAuthenticatorAttestationResponse } from '../../utils/webauthn.uti
 @Controller('webauthn')
 @UseGuards(JwtGuard)
 export class WebauthnController {
+  // #region Constructors (1)
+
   constructor(
     private readonly authenticationDatService: AuthenticationDataService,
   ) {}
+
+  // #endregion Constructors (1)
+
+  // #region Public Methods (2)
 
   @Post('key')
   public async getKeyForUser(@UserData() userData: User) {
@@ -36,4 +42,6 @@ export class WebauthnController {
       );
     }
   }
+
+  // #endregion Public Methods (2)
 }

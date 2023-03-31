@@ -29,7 +29,7 @@ export class LoginController {
 
   // #endregion Constructors (1)
 
-  // #region Public Methods (2)
+  // #region Public Methods (3)
 
   @Get('user-data')
   @ApiBearerAuth()
@@ -77,5 +77,5 @@ export class LoginController {
     }
   }
 
-  // #endregion Public Methods (2)
+  // #endregion Public Methods (3)
 }

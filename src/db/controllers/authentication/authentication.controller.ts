@@ -8,15 +8,23 @@ import { AuthenticationDataService } from '../../services/authentication-data/au
 @Controller('authentication')
 @UseGuards(JwtGuard)
 export class AuthenticationController {
+  // #region Constructors (1)
+
   constructor(private readonly authDataService: AuthenticationDataService) {}
+
+  // #endregion Constructors (1)
+
+  // #region Public Methods (2)
+
+  @Delete(':id')
+  public async deleteAuth(@Param('id') id: number) {
+    return await this.authDataService.deleteAuth(id);
+  }
 
   @Get('')
   public async getAuthsForUser(@UserData() user: User) {
     return await this.authDataService.getAuthsForUser(user);
   }
 
-  @Delete(':id')
-  public async deleteAuth(@Param('id') id: number) {
-    return await this.authDataService.deleteAuth(id);
-  }
+  // #endregion Public Methods (2)
 }

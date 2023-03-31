@@ -13,16 +13,16 @@ export class UserService extends PrismaService {
 
   // #endregion Constructors (1)
 
-  // #region Public Methods (3)
+  // #region Public Methods (4)
 
   public async addNewUser(userName: string, rawPassword: string) {
     const password = await encryptPassword(rawPassword);
     await this.prismaService.user.create({ data: { userName, password } });
   }
 
-  public async findByName(userName: string, omitPassword = true) {
+  public async findById(userId: number, omitPassword = true) {
     const user = await this.prismaService.user.findUnique({
-      where: { userName },
+      where: { id: userId },
     });
     if (!user) {
       return null;
@@ -31,9 +31,9 @@ export class UserService extends PrismaService {
     return user;
   }
 
-  public async findById(userId: number, omitPassword = true) {
+  public async findByName(userName: string, omitPassword = true) {
     const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
+      where: { userName },
     });
     if (!user) {
       return null;
@@ -50,5 +50,5 @@ export class UserService extends PrismaService {
     return users;
   }
 
-  // #endregion Public Methods (3)
+  // #endregion Public Methods (4)
 }
