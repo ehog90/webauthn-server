@@ -39,6 +39,7 @@ export class WebauthnController {
   }
 
   @Post('register')
+  @ApiBearerAuth()
   @UseGuards(JwtGuard)
   public async register(
     @UserData() userData: User,
