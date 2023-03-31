@@ -1,0 +1,17 @@
+{
+  "files.eol": "\n",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "vsicons.presets.nestjs": true,
+  "vsicons.presets.angular": false,
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "zsh",
+      "icon": "star"
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "exportall.config.folderListener": ["/src/modules/db/entities"]
+}

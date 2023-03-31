@@ -14,6 +14,8 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.setGlobalPrefix('api');
+
   const config = new DocumentBuilder()
     .setTitle('NestJS Webauthn Demo')
     .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
@@ -25,7 +27,7 @@ async function bootstrap() {
   );
   SwaggerModule.setup('docs', app, document);
   app.enableCors({
-    origin: 'http://localhost:5005',
+    origin: 'http://localhost:3002',
     credentials: true,
   });
   await app.listen(5005);

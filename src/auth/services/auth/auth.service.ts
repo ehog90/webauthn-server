@@ -37,5 +37,18 @@ export class AuthService {
     return { userData, jwt };
   }
 
+  public async authByUserId(
+    userId: number,
+  ): Promise<{ userData: User | null; jwt: string | null }> {
+    const userData = await this.userService.findById(userId, false);
+    if (!userData) {
+      return { userData: null, jwt: null };
+    }
+    const jwt = await this.jwtService.signAsync({
+      userName: userData.userName,
+    });
+    return { userData, jwt };
+  }
+
   // #endregion Public Methods (1)
 }

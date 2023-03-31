@@ -3,12 +3,13 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { DbModule } from '../db/db.module';
 import { LoginController } from './controllers/login/login.controller';
+import { WebauthnController } from './controllers/webauthn/webauthn.controller';
 import { JwtGuard } from './guards/jwt/jwt.guard';
 import { AuthService } from './services/auth/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
-  controllers: [LoginController],
+  controllers: [LoginController, WebauthnController],
   imports: [
     DbModule,
     JwtModule.register({

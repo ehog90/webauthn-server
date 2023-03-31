@@ -1,8 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -13,17 +11,18 @@ generator client {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  registeredAt     DateTime    @default(now())
-  userName  String @unique
-  password String
-  auths Authentication[]
+  id           Int              @id @default(autoincrement())
+  registeredAt DateTime         @default(now())
+  userName     String           @unique
+  password     String
+  auths        Authentication[]
 }
 
 model Authentication {
-  id    Int     @default(autoincrement()) @id
-  createdAt     DateTime    @default(now())
-  challenge String
-  user    User    @relation(fields: [userId], references: [id])
-  userId  Int
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  publicKey    String
+  credentialId String
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
 }

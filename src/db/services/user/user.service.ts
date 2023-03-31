@@ -31,6 +31,17 @@ export class UserService extends PrismaService {
     return user;
   }
 
+  public async findById(userId: number, omitPassword = true) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) {
+      return null;
+    }
+    omitPassword && delete user.password;
+    return user;
+  }
+
   public async getUserList() {
     const users = await this.prismaService.user.findMany();
     users.forEach((user) => {

@@ -1,4 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { UserService } from '../../services/user/user.service';
@@ -16,9 +22,14 @@ export class UserController {
 
   @Post()
   public async addUser(@Body() createUser: CreateUserDto) {
-    return this.userService.addNewUser(
-      createUser.userName,
-      createUser.password,
-    );
+    try {
+      return await this.userService.addNewUser(
+        createUser.userName,
+        createUser.password,
+      );
+    } catch (err) {
+      //Don't do this
+      throw new BadRequestException();
+    }
   }
 }
