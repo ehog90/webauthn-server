@@ -34,39 +34,6 @@ export const randomBase64URLBuffer = (len: number) => {
 };
 
 /**
- * Generates makeCredentials request
- * @param  {String} username       - username
- * @param  {String} displayName    - user's personal display name
- * @param  {String} id             - user's base64url encoded id
- * @return {MakePublicKeyCredentialOptions} - server encoded make credentials request
- */
-export const generateServerMakeCredRequest = (username, displayName, id) => {
-  return {
-    challenge: randomBase64URLBuffer(32),
-
-    // TODO param RP generic
-    rp: {
-      name: 'Oui.sncf',
-    },
-
-    user: {
-      id: id,
-      name: username,
-      displayName: displayName,
-    },
-
-    attestation: 'direct',
-
-    pubKeyCredParams: [
-      {
-        type: 'public-key',
-        alg: -7, // "ES256" IANA COSE Algorithms registry
-      },
-    ],
-  };
-};
-
-/**
  * Generates getAssertion request
  * @param  {Array} authenticators              - list of registered authenticators
  * @return {PublicKeyCredentialRequestOptions} - server encoded get assertion request
