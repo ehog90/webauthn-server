@@ -42,7 +42,6 @@ export class UserController {
       return await this.userService.deleteUser(userName);
     } catch (err) {
       //Don't do this
-      console.log('aaaaa', err);
       throw new BadRequestException();
     }
   }
