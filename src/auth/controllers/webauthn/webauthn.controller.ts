@@ -45,14 +45,12 @@ export class WebauthnController {
     @UserData() userData: User,
     @Body() reg: WebauthnRegistrationDto,
   ) {
-    if (reg.attestationObject && reg.clientData) {
-      const authResponse = verifyAuthenticatorAttestationResponse(reg);
-      await this.authenticationDatService.saveAuth(
-        userData,
-        authResponse.publicKey,
-        authResponse.credID,
-      );
-    }
+    const authResponse = verifyAuthenticatorAttestationResponse(reg);
+    await this.authenticationDatService.saveAuth(
+      userData,
+      authResponse.publicKey,
+      authResponse.credID,
+    );
   }
 
   // #endregion Public Methods (3)
